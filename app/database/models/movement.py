@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float
 from app.database.connection import Base
+from datetime import datetime
 
 class Movement(Base):
     __tablename__ = "movement"
@@ -7,5 +8,5 @@ class Movement(Base):
     id = Column(Integer, primary_key=True)
     registration_id = Column(Integer, ForeignKey("registration.id"))
     type = Column(String)
-    amount = Column(Integer)
-    created_at = Column(DateTime)
+    amount = Column(Float)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
