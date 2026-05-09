@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from app.database.connection import Base
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 class User(Base):
@@ -12,3 +13,5 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     status = Column(String, default="ACTIVO")
+
+    customer = relationship("Customer", back_populates="user")

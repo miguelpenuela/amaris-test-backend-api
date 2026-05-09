@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float
 from app.database.connection import Base
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 class Customer(Base):
@@ -17,3 +18,5 @@ class Customer(Base):
     general_balance = Column(Float, default=500000.0)
 
     email = Column(String, unique=True, nullable=False)
+
+    user = relationship("User", uselist=False, back_populates="customer")
