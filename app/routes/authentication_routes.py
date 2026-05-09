@@ -3,10 +3,12 @@ from fastapi import Depends
 from fastapi import HTTPException
 
 from sqlalchemy.orm import Session
-
 from app.database.connection import get_db
 
+# Schemas
 from app.schemas.customer_schema import (CustomerCreate, CustomerResponse)
+
+# Services
 from app.services.authentication_service import create_customer
 
 router = APIRouter(prefix="/v1/api/authentication", tags=["authentication"])
