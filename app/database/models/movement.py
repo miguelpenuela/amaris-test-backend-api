@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float
 from app.database.connection import Base
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 class Movement(Base):
@@ -10,3 +11,5 @@ class Movement(Base):
     type = Column(String)
     amount = Column(Float)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+
+    registration = relationship("Registration", back_populates="movements")

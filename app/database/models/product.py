@@ -12,3 +12,4 @@ class Product(Base):
     min_amount = Column(Float)
 
     product_type = relationship("ProductType", back_populates="product")
+    registration = relationship("Registration", back_populates="product")

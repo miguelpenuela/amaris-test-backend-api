@@ -44,3 +44,13 @@ def registration_to_found(db: Session, body: RegistrationCreate) -> Registration
 def validate_min_amount(db: Session, body: RegistrationCreate):
     product =  db.query(Product).filter(Product.id == body.product_id).first()
     return body.balance >= product.min_amount
+
+def get_financial_products(customer_id: int, db: Session):
+    sql = select(Registration).options(joinedload(Registration.product)).filter(Registration.customer_id == customer_id)
+    result = db.execute(sql).scalars().all()
+    return result
+
+def get_movements(registration_id: int, db: Session):
+    sql = select(Registration).options(joinedload(Registration.movements)).filter(Registration.id == registration_id)
+    result = db.execute(sql).unique().scalars().all()
+    return result
