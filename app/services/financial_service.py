@@ -51,6 +51,6 @@ def get_financial_products(customer_id: int, db: Session):
     return result
 
 def get_movements(registration_id: int, db: Session):
-    sql = select(Registration).options(joinedload(Registration.movements)).filter(Registration.id == registration_id)
-    result = db.execute(sql).unique().scalars().all()
+    sql = select(Registration).options(joinedload(Registration.product),joinedload(Registration.movements)).filter(Registration.id == registration_id)
+    result = db.execute(sql).unique().scalars().first()
     return result
