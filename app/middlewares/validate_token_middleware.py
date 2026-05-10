@@ -9,6 +9,10 @@ EXCLUDED_PATHS = [
 ]
 
 async def validate_token(request: Request, call_next):
+    
+    
+    if request.method == "OPTIONS":
+        return await call_next(request)
 
     # Exclude paths
     if request.url.path in EXCLUDED_PATHS:
