@@ -5,7 +5,8 @@ API_KEY = "app-api-key-value"
 
 EXCLUDED_PATHS = [
     "/v1/api/authentication/login",
-    "/v1/api/authentication/register"
+    "/v1/api/authentication/register",
+    "/health"
 ]
 
 async def validate_token(request: Request, call_next):
