@@ -5,10 +5,14 @@ class RegistrationBase(BaseModel):
     customer_id: int
     balance: float
 
-class RegistrationCreate(RegistrationBase):
+class SubscribeRequestBody(RegistrationBase):
+    notification_type: str
     pass
 
 class RegistrationResponse(RegistrationBase):
     id: int
     class Config:
         from_attributes = True
+
+class CancelRegistrationBody(BaseModel):
+    id: int
