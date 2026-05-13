@@ -58,7 +58,7 @@ def validate_min_amount(db: Session, body: SubscribeRequestBody):
     return body.balance >= product.min_amount
 
 def get_financial_products(customer_id: int, db: Session):
-    sql = select(Registration).options(joinedload(Registration.product)).filter(Registration.customer_id == customer_id)
+    sql = select(Registration).options(joinedload(Registration.product)).filter(Registration.customer_id == customer_id).order_by(Registration.id.desc())
     result = db.execute(sql).scalars().all()
     return result
 
