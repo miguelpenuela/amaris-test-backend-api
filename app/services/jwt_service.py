@@ -22,3 +22,10 @@ def create_access_token(data: dict):
     })
 
     return jwt.encode(payload=payload, key=SECRET_KEY, algorithm=ALGORITHM)
+
+def decode_token(token: str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload
+    except Exception:
+        return None
