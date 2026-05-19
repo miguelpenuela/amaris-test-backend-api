@@ -8,6 +8,7 @@ from app.database.models.user import User
 
 #Schemas
 from app.schemas.create_customer_schema import (CreateCustomerRequest)
+from app.services.jwt_service import create_access_token
 
 from .crypto_service import (hash_password, verify_password)
 
@@ -49,6 +50,19 @@ def login_user(db: Session, username: str, password: str):
 
         customer_info = db.query(Customer).filter(Customer.email == finded_user.username).first()
 
-        return {"user": finded_user, "customer_info": customer_info}
+        token = create_access_token({
+            "sub": str(finded_user.id),
+            "name": customer_info.name,
+            "email": customer_info.email
+        })
+
+        return {
+            "access_token": token,
+            "customer_info": customer_info,
+            "user": {
+                "id": finded_user.id,
+                "username": finded_user.username
+            }
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
