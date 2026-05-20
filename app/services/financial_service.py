@@ -44,9 +44,9 @@ def subscribe_fund(db: Session, body: SubscribeRequestBody) -> RegistrationRespo
 
         setattr(customer, 'general_balance', new_general_balance)
 
-        db.refresh(customer)
-
         db.commit()
+
+        db.refresh(customer)
     
         return customer
     except Exception as e:
