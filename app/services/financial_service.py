@@ -20,7 +20,7 @@ def get_products(db: Session):
 
 def subscribe_fund(db: Session, body: SubscribeRequestBody) -> RegistrationResponse:
     try:
-        print("Body de datos: ",body)
+        
         if (not validate_min_amount(db, body)):
             raise HTTPException(status_code=409, detail="The amount is not valid according to the product rules")
     
